@@ -42,8 +42,6 @@ COPY nominatim.conf /etc/apache2/sites-enabled/000-default.conf
 # Load initial data
 ARG with_postcodes_gb
 ARG with_postcodes_us
-ARG pbf_url
-ARG import_threads
 
 RUN if [ "$with_postcodes_gb" = "" ]; then echo "Skipping optional GB postcode file"; else echo "Downloading optional GB postcode file"; curl http://www.nominatim.org/data/gb_postcode_data.sql.gz > /app/src/data/gb_postcode_data.sql.gz; fi;
 RUN if [ "$with_postcodes_us" = "" ]; then echo "Skipping optional US postcode file"; else echo "Downloading optional US postcode file"; curl http://www.nominatim.org/data/us_postcode_data.sql.gz > /app/src/data/us_postcode_data.sql.gz; fi;
@@ -57,9 +55,7 @@ COPY start.sh /app/start.sh
 COPY startapache.sh /app/startapache.sh
 COPY startpostgres.sh /app/startpostgres.sh
 COPY init.sh /app/init.sh
-COPY geoDataDefault.osm.pbf /data/geoDataDefault.osm.pbf
 
-RUN if [ "$pbf_url" = "" ]; then pbf_url=http://download.geofabrik.de/europe/andorra-latest.osm.pbf; fi; if [ "$import_threads" = "" ]; then import_threads=4; fi; echo "Downloading pbf from: '${pbf_url}'" && curl "${pbf_url}" > /data/dump.pbf && sh /app/init.sh /data/dump.pbf postgresdata ${import_threads};
 
 
 
