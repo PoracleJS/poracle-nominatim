@@ -59,7 +59,7 @@ COPY startpostgres.sh /app/startpostgres.sh
 COPY init.sh /app/init.sh
 COPY geoDataDefault.osm.pbf /data/geoDataDefault.osm.pbf
 
-RUN if [ "$pbf_url" = "" ]; then pbf_url=http://download.geofabrik.de/europe/andorra-latest.osm.pbf; fi; if [ "$import_threads" = "" ]; then import_threads=4; fi; echo "Downloading pbf from: '${pbf_url}'" && curl pbf_url > /data/dump.pbf && sh /app/init.sh /data/dump.pbf postgresdata ${import_threads};
+RUN if [ "$pbf_url" = "" ]; then pbf_url=http://download.geofabrik.de/europe/andorra-latest.osm.pbf; fi; if [ "$import_threads" = "" ]; then import_threads=4; fi; echo "Downloading pbf from: '${pbf_url}'" && curl "${pbf_url}" > /data/dump.pbf && sh /app/init.sh /data/dump.pbf postgresdata ${import_threads};
 
 
 
