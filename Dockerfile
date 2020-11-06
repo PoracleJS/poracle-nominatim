@@ -58,7 +58,7 @@ COPY startapache.sh /app/startapache.sh
 COPY startpostgres.sh /app/startpostgres.sh
 COPY init.sh /app/init.sh
 
-RUN if [ "$importable_filename" = "" ]; importable_filename=geoDataDefault.osm.pbf then ;  if [ "$import_threads" = "" ]; import_threads=4 then ; sh /app/init.sh /data/${importable_filename}.osm.pbf postgresdata ${import_threads}
+RUN if [ "$importable_filename" = "" ]; importable_filename=geoDataDefault.osm.pbf then ;  if [ "$import_threads" = "" ]; import_threads=4 then ; sh /app/init.sh /data/${importable_filename}.osm.pbf postgresdata ${import_threads}; fi;
 
 
 
