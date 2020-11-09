@@ -11,7 +11,7 @@ RUN apt-get -y update -qq && \
     build-essential cmake g++ libboost-dev libboost-system-dev \
     libboost-filesystem-dev libexpat1-dev zlib1g-dev \
     libbz2-dev libpq-dev libproj-dev \
-    postgresql-server-dev-12 postgresql-12-postgis-3 \
+    postgresql-12-postgis-3 \
     postgresql-contrib postgresql-12-postgis-3-scripts \
     apache2 php php-pgsql libapache2-mod-php \
     php-intl python3-setuptools python3-dev python3-pip \
@@ -55,8 +55,10 @@ COPY start.sh /app/start.sh
 COPY startapache.sh /app/startapache.sh
 COPY startpostgres.sh /app/startpostgres.sh
 COPY init.sh /app/init.sh
+COPY entrypoint.sh /app/entrypoint.sh
 
-
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 
 
