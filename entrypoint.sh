@@ -5,6 +5,8 @@ sed -i "s/.*@define\('CONST_Database_DSN'.*/@define\('CONST_Database_DSN', 'pgsq
 # sed -i "s/.*@define\('CONST_Replication_Url'.*/@define\('CONST_Replication_Url', '${NOMINATIM_REPLICATION_URL}' )" /app/src/build/settings/local.php
 
 
+echo "Starting nominatim-docker container"
+cat /app/src/build/settings/local.php
 
 if [ $NOMINATIM_INIT ]
 then
